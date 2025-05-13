@@ -1,0 +1,71 @@
+.content .form
+{
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex; 
+    gap: 20px;
+}
+.addAuthor 
+{
+    background-color: var(--heading);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.addAuthor:hover
+{
+    background-color: var(--link);
+}
+.add-author-container,
+.edit-author-container
+{
+    background-color: var(--background);
+    position: fixed;
+    width: 80%;
+    height: fit-content;
+    min-height: 80%;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    padding: 30px 20px;
+    border: 1px solid var(--heading);
+    box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: none;
+}
+.quit
+{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: var(--heading);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+}
+.quit:hover
+{
+    color: var(--error);
+    background-color: rgba(128, 128, 128, .15);
+}
+.browse
+{
+    cursor: pointer;
+    margin: 10px 20px 0 0;
+}
+@media screen and (max-width: 770px) {
+    .search-browse
+    {
+        width: 100% !important;
+        flex-direction: column;
+        align-items: center !important;
+        height: fit-content !important;
+    }
+    .add-author-container,
+    .edit-author-container
+    {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+}

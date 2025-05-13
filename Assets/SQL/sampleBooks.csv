@@ -1,0 +1,6 @@
+id,ISBN,Title,Authors,Description,"Publication Year",Publisher,"Copies Owned",Genre,Status,"Cover Image"
+1,978-0141439518,"Pride and Prejudice","George Orwell, J.R.R. Tolkien, Jane Austen","A classic romantic novel.",1813,"T. Egerton",3,"Classic, Romance",available,pride.jpg
+2,978-0345391803,"The Hitchhiker's Guide to the Galaxy","Douglas Adams","A comedic science fiction series.",1979,"Pan Books",5,"Adventure, Science Fiction",available,hitchhikers.jpg
+3,978-0441172719,Dune,"Frank Herbert","A science fiction masterpiece.",1965,"Chilton Books",2,"Adventure, Science Fiction",available,dune.jpg
+4,978-0451524935,1984,"George Orwell","A dystopian novel.",1949,"Secker & Warburg",0,"Classic, Dystopian",unavailable,1984.jpg
+5,978-0618260231,"The Lord of the Rings","J.R.R. Tolkien","An epic fantasy adventure.",1954,"Allen & Unwin",4,"Adventure, Fantasy",available,lotr.jpg

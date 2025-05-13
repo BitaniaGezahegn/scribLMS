@@ -1,0 +1,128 @@
+.cards
+{
+    margin-top: 16px;
+    height: 100%;
+    width: 100%;
+    max-width: 1059px;
+    display: grid;
+    place-items: center;
+}
+.wrapper
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    place-items: center;
+    grid-gap: 20px;
+    row-gap: 40px;
+    width: 100%;
+}
+.card
+{
+    width: 200px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px;
+    flex: 1 0 200px;
+    border: 2px solid var(--light-text);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px 5px 0px 5px;
+    background: rgba(128, 128, 128, .175);
+    max-width: 200px;
+    cursor: pointer;
+}
+.card:hover
+{
+    background: var(--background)
+}
+.card .top-section
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.card .top-section h4
+{
+    text-align: center;
+    color: var(--text);
+}
+.card .top-section p
+{
+    margin-top: -3px;
+}
+.card img
+{
+    width: 80px;
+    height: 120px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.card .bottom-section
+{
+    width: 100%;
+}
+.card .author-bookstatus
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.card .author-bookstatus .by
+{
+    color: var(--sub-text);
+}
+.card .author-bookstatus p
+{
+    font-size: 12px;
+}
+.card .author-bookstatus .status
+{
+    min-width: 17px;
+    min-height: 17px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card .author-bookstatus .status span
+{
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.card .author-bookstatus .available{background-color: rgba(39, 174, 96, .3);}
+.card .author-bookstatus .available span{background-color: var(--success);}
+.card .author-bookstatus .unavailable{background-color:rgba(235, 87, 87, .3);}
+.card .author-bookstatus .unavailable span{background-color: var(--error);}
+.card .description
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.card .description p
+{
+    text-align: center;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; 
+}
+.action-buttons
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 10px;
+}
+.action-buttons .edit{color: var(--heading);}
+.action-buttons .delete{color: var(--error);}
+.action-buttons .view{color: var(--primary);}

@@ -1,0 +1,86 @@
+.btn
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border: 2px solid var(--light-text);
+    border-radius: 8px;
+    padding: 6px 9px;
+    cursor: pointer;
+    width: fit-content;
+    position: relative;
+}
+.btn:hover
+{
+    border: 2px solid var(--link);
+}
+.btn span
+{
+    color: var(--text);
+}
+.btn p
+{
+    color: var(--sub-text);
+    white-space: nowrap;
+}
+.select
+{
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    height: 0px;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3px;
+    overflow-y: hidden;
+    z-index: 1;
+}
+.select .option
+{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 10px;
+    gap: 10px;
+    background-color: var(--text);
+}
+.select .option:hover
+{
+    background-color: var(--sub-text);
+}
+.select p, .select span
+{
+    color: var(--background);
+}
+.select span
+{
+    width: 24px;
+    height: 24px;
+}
+.filled
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary);
+    padding: 5px 15px;
+    border-radius: 5px;
+    gap: 10px;
+    height: 34px;
+    outline: none;
+    border: none;
+    transition: .2s ease-in-out;
+    cursor: pointer;
+}
+.filled:hover
+{
+    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 10px 0px;
+}
+.filled .icon,.filled  p
+{
+    color: var(--background);
+}

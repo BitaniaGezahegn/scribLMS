@@ -1,0 +1,36 @@
+.actions div
+{
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+div.action span{
+    height: 48px;
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    cursor: pointer;
+}
+.action span:hover
+{
+    text-decoration: underline;
+}
+.edit span
+{
+    color: var(--heading);
+}
+.edit span:hover {
+    text-decoration: underline;
+}
+.delete span
+{
+    color: var(--error);
+}
+.view span
+{
+    color: var(--primary);
+}

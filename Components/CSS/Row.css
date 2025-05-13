@@ -1,0 +1,116 @@
+.list
+{
+    width: 80%;
+    margin-top: 16px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0px 4px 7px 4px rgba(0, 0, 0, 0.25);
+}
+table
+{
+    border-collapse: collapse;
+    width: 100%;
+}
+tr:hover
+{
+    background-color: rgba(128, 128, 128, .4);
+}
+th
+{
+    background-color: var(--light-text);
+
+}
+th h4
+{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+th h4 .status-indicator
+{
+    width: 8px;
+    height: 8px;
+    background-color: var(--secondary);
+    border-radius: 50%;
+    margin-left: 5px;
+}
+th, td
+{
+    text-align: left;
+    padding: 12px 24px;
+}
+td
+{
+    border-bottom: 1px solid var(--sub-text);
+    height: 31px;
+}
+.status-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-radius: 10px;
+    padding: 2px 6px;
+    width: fit-content;
+}
+.status-container p
+{
+    text-transform: capitalize;
+}
+.status-container span
+{
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+.available{background-color: rgba(39, 174, 96, .3);}
+.available p{color: var(--success);}
+.available span {background-color: var(--success);}
+.unavailable{background-color: rgba(235, 87, 87, .3);}
+.unavailable p{color: var(--error);}
+.unavailable span {background-color: var(--error);}
+
+.approved{background-color: rgba(39, 174, 96, .3);}
+.approved p{color: var(--success);}
+.approved span {background-color: var(--success);}
+.suspended{background-color: rgba(235, 87, 87, .3);}
+.suspended p{color: var(--error);}
+.suspended span {background-color: var(--error);}
+.unapproved{background-color: rgba(255, 107, 13, .3);}
+.unapproved p{color: var(--secondary);}
+.unapproved span {background-color: var(--secondary);}
+
+table td:nth-child(4) div
+{
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+table td:nth-child(4) div span{
+    height: 48px;
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    cursor: pointer;
+}
+table td:nth-child(4) div span:hover
+{
+    text-decoration: underline;
+}
+table td:nth-child(4) div .edit
+{
+    color: var(--heading);
+}
+table td:nth-child(4) div .delete
+{
+    color: var(--error);
+}
+table td:nth-child(4) div .view
+{
+    color: var(--primary);
+}

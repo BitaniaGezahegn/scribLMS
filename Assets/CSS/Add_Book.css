@@ -1,0 +1,113 @@
+.container
+{
+    margin-bottom: 150px;
+}
+.content
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-direction: column;
+    width: 100%;
+}
+.header
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+    gap: 10px;
+    margin-top: 16px;
+}
+.header h2
+{
+    color: var(--primary);
+}
+.content .form
+{
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+.content form
+{
+    display: flex;
+    gap: 30px;
+}
+.content .form .inputs
+{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    gap: 10px;
+}
+.content .form .input
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+.content .form .input h4
+{
+    color: var(--text);
+}
+.content .form .input input,
+.content .form .input textarea,
+.content .form .input select
+{
+    padding: 12px 16px;
+    border: 1px solid var(--light-text);
+    border-radius: 8px;
+    outline: none;
+}
+.content .form .input input::placeholder
+{
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+    letter-spacing: -1px;
+    font-size: 14px;
+    color: var(--sub-text);
+}
+.content .form .input input,
+.content .form .input .wrapper .submit
+{
+    width: 50%;
+}
+.content .form .input input,
+.content .form .input .wrapper
+{
+    width: 100%;
+}
+.content .form .input .wrapper .submit
+{
+    margin-top: 10px;
+}
+.content .form button
+{
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+.content .form .right-inputs
+{
+    align-items: center;
+}
+
+.content .form .right-inputs .action-btn
+{
+    width: fit-content;
+    margin-top: 35px;
+}
+@media screen and (max-width: 770px) {
+    .content form
+    {
+        flex-direction: column;
+        align-items: center;
+    }
+    .content .form
+    {
+        width: 100%;
+    }
+  }

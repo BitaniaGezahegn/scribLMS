@@ -1,0 +1,155 @@
+.content-details
+{
+    margin-bottom: 0px;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 1;
+}
+.banner
+{
+    position: relative;
+    width: 105%;
+    height: 25vh;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    filter: blur(10px);
+    z-index: -2;
+}
+.content-wrapper
+{
+    padding-bottom: 96px;
+    width: 100%;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.content .floating-cover
+{
+    width: 100%;
+    margin-top: -112.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content .floating-cover img
+{
+    width: 100px;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.50);
+}
+.content-wrapper .main-details
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+    flex-direction: column;
+}
+.content-wrapper .main-details .title-paginate
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+.content-wrapper .main-details .title-paginate button
+{
+    background-color: transparent;
+    border: 1px solid var(--light-text);
+    outline: none;
+    display: flex;
+    border-radius: 10px;
+}
+.content-wrapper .main-details .title-paginate span
+{
+    font-size: 48px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--sub-text);
+}
+.content-wrapper .main-details .title-paginate span:hover
+{
+    background-color: var(--light-text);
+    color: var(--heading);
+}
+.content-wrapper .actions-wrapper
+{
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+.content-wrapper .actions-wrapper span{
+    height: 48px;
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    cursor: pointer;
+}
+.content-wrapper .actions-wrapper span:hover
+{
+    text-decoration: underline;
+}
+.content-wrapper .actions-wrapper .edit
+{
+    color: var(--heading);
+}
+.content-wrapper .actions-wrapper .delete
+{
+    color: var(--error);
+}
+.content-wrapper .actions-wrapper .view
+{
+    color: var(--primary);
+}
+/* All Details */
+.content-wrapper .all-details
+{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+.content-wrapper .all-details .right-details
+{
+    max-width: 45%;
+    text-align: left;
+    min-width: 45%;
+    border-left: 1px solid var(--light-text);
+    padding-left: 16px;
+}
+.content-wrapper .all-details .left-details
+{
+    max-width: 45%;
+}
+.content-wrapper .all-details .detail
+{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: fit-content;
+}
+.content-wrapper .all-details .detail p
+{
+    font-size: 14px;
+}
+.content-wrapper .right-details .detail p,
+.content-wrapper .right-details .description p
+{
+    font-size: 12px;
+}
+.all-details .heading
+{
+    color: var(--text);
+    margin-bottom: 10px;
+}
+.biography
+{
+    margin-top: 20px;
+}

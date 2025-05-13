@@ -1,0 +1,27 @@
+a
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+a.selected
+{
+    border-bottom: 2px solid var(--secondary);
+}
+a p
+{
+    text-transform: uppercase;
+}
+a p:nth-child(2)
+{
+    text-transform: none;
+}
+a p:hover
+{
+    color: var(--primary);
+}
+.bicon
+{
+    font-size: 15px !important;
+    color: var(--light-text);
+}

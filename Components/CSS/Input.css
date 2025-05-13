@@ -1,0 +1,46 @@
+.input
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+.input h4
+{
+    color: var(--text);
+}
+.input input,
+.input textarea,
+.input select
+{
+    padding: 12px 16px;
+    border: 1px solid var(--light-text);
+    border-radius: 8px;
+    outline: none;
+}
+.input input::placeholder
+{
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+    letter-spacing: -1px;
+    font-size: 14px;
+    color: var(--sub-text);
+}
+.input input:focus
+{
+    border: 1px solid var(--link);
+}
+.input input,
+.input .wrapper .submit
+{
+    width: 50%;
+}
+.input input,
+.input .wrapper
+{
+    width: 100%;
+}
+.input .wrapper .submit
+{
+    margin-top: 10px;
+}
