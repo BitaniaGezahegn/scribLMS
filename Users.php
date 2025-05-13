@@ -10,7 +10,7 @@ require_once 'config.php';
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION['roleID'] === 1) {
     require_once 'Includes/Data/dbFunctions.inc.php';
-    
+
     $userrole = $_SESSION['roleID'];
     $userid = $_SESSION['userid'];
     $user = getUser('', $userid)['users'][$userid] ?? '';
@@ -27,7 +27,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION[
     exit();
 }
 
-// Popup Messages 
+// Popup Messages
 if (isset($_GET['popup']) && $_GET['popup'] == 'error') {
     $message = '';
     switch ($_GET['message']) {
@@ -92,11 +92,11 @@ if (isset($_GET['popup']) && $_GET['popup'] == 'error') {
     <link rel="shortcut icon" href="Assets/Images/Logo/Icons/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="Assets/Images/Logo/Icons/apple-touch-icon.png" />
     <link rel="manifest" href="Assets/Images/Logo/Icons/site.webmanifest" />
-    
+
     <!-- Custom Style Sheets -->
-    <link rel="stylesheet" href="Assets/css/reset.css">
-    <link rel="stylesheet" href="Assets/css/styles.css">
-    <link rel="stylesheet" href="Assets/css/Users.css">
+    <link rel="stylesheet" href="Assets/CSS/reset.css">
+    <link rel="stylesheet" href="Assets/CSS/styles.css">
+    <link rel="stylesheet" href="Assets/CSS/Users.css">
 </head>
 <body>
 <!-- Includes -->
@@ -148,7 +148,7 @@ $table = Table(atts: [
             </tbody>
         </table>
     </div>
-    
+
     <?php
     if ($userrole == 1) {
         $role = 'Admin';
@@ -160,7 +160,7 @@ $table = Table(atts: [
     <?= Account(atts: ['owner' => $username, 'role' => $role, 'profile' => 'Assets/Images/Profile Pictures/profile picture.jpg']); ?>
 
     <script defer src="Assets/JS/users.js"></script>
-    
+
 
 
 <?php
@@ -173,7 +173,7 @@ $table = Table(atts: [
      $firstname = $data['firstName'] ?? '';
      $lastname = $data['lastName'] ?? '';
      $joinedDate = $data['joinedDate'] ?? '';
-     
+
     //  Roles
      $roles = [];
      $getRoles = [
@@ -210,14 +210,14 @@ $table = Table(atts: [
             'status' => 'Suspended'
         ]
     ];
-    
+
     foreach ($getStstuses as $key => $value) {
         $statuses[] = [
             'option' => $value['status'],
             'value' => $value['ID']
         ];
         }
-     
+
 
     echo '
     <script defer>

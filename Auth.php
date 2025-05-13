@@ -4,7 +4,7 @@
 <?php require_once 'Components/Input.php' ?>
 <?php require_once 'Components/Popup.php' ?>
 
-<?php 
+<?php
 if (isset($_GET['popup']) && $_GET['popup'] == 'error') {
     $message = '';
     switch ($_GET['message']) {
@@ -75,10 +75,10 @@ if (isset($_GET['popup']) && $_GET['popup'] == 'error') {
     <link rel="shortcut icon" href="Assets/Images/Logo/Icons/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="Assets/Images/Logo/Icons/apple-touch-icon.png" />
     <link rel="manifest" href="Assets/Images/Logo/Icons/site.webmanifest" />
-    
+
     <!-- Custom Style Sheets -->
-    <link rel="stylesheet" href="Assets/css/reset.css">
-    <link rel="stylesheet" href="Assets/css/sign_in.css">
+    <link rel="stylesheet" href="Assets/CSS/reset.css">
+    <link rel="stylesheet" href="Assets/CSS/sign_in.css">
 </head>
 <body>
     <div class="container">

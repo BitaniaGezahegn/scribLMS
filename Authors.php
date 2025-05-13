@@ -3,7 +3,7 @@ require_once 'config.php';
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     require_once 'Includes/Data/dbFunctions.inc.php';
-    
+
     $userrole = $_SESSION['roleID'];
     $userid = $_SESSION['userid'];
     $user = getUser('', $userid)['users'][$userid] ?? '';
@@ -35,17 +35,17 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <link rel="shortcut icon" href="Assets/Images/Logo/Icons/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="Assets/Images/Logo/Icons/apple-touch-icon.png" />
     <link rel="manifest" href="Assets/Images/Logo/Icons/site.webmanifest" />
-    
+
     <!-- Custom Style Sheets -->
-    <link rel="stylesheet" href="Assets/css/reset.css">
-    <link rel="stylesheet" href="Assets/css/styles.css">
-    <link rel="stylesheet" href="Assets/css/Authors.css">
+    <link rel="stylesheet" href="Assets/CSS/reset.css">
+    <link rel="stylesheet" href="Assets/CSS/styles.css">
+    <link rel="stylesheet" href="Assets/CSS/Authors.css">
 </head>
 <body>
 <!-- Includes -->
 <?php require_once 'Components/Search.php' ?>
 
-<?php 
+<?php
 $Aauthors = getAuthors();
 if (isset($_GET['q'])) {
     if ($_GET['q'] != '') {
@@ -96,7 +96,7 @@ Popup(
             'search' => '',
             'placeholder' => 'Search for an author'
         ]); ?>
-        
+
         <div class="browse">
         <?=
         Button(

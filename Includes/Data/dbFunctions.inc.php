@@ -73,21 +73,21 @@ function updateBook($isbn, $authorIDs, $title, $publicationYear, $coverImage, $d
     global $conn;
 
     // 1. Update Book Details
-    $sqlDetail = 'UPDATE bookdetail
+    $sqlDetail = 'UPDATE BookDetail
                     SET title = ?,
                     publication_year = ?,
                     cover_image = ?,
                     description = ?,
                     publisher = ?,
                     copies_owned = ?
-                    WHERE id = (SELECT bookdetails FROM books WHERE ISBN = ?);';
+                    WHERE id = (SELECT bookDetails FROM Books WHERE ISBN = ?);';
     $stmtDetail = mysqli_prepare($conn, $sqlDetail);
 
     if (!$stmtDetail) {
         die('Error preparing BookDetail statement: ' . mysqli_error($conn));
     }
     mysqli_stmt_bind_param($stmtDetail, 'sssssss',  $title, $publicationYear, $coverImage, $description, $publisher, $copiesOwned, $isbn);
-    
+
     if (!mysqli_stmt_execute($stmtDetail)) {
         die('Error executing BookDetail statement: ' . mysqli_error($conn));
     }
@@ -102,7 +102,7 @@ function updateBook($isbn, $authorIDs, $title, $publicationYear, $coverImage, $d
     // 2. Update Status
     $sqlBooks = 'UPDATE Books SET statusID = ? WHERE ISBN = ?;';
     $stmtBooks = mysqli_prepare($conn, $sqlBooks);
-    
+
     if (!$stmtBooks) {
         die('Error preparing Books statement: ' . mysqli_error($conn));
     }
@@ -115,7 +115,7 @@ function updateBook($isbn, $authorIDs, $title, $publicationYear, $coverImage, $d
     // 3. Delete all existing book authors
     $sqlBooks = 'DELETE FROM bookauthor WHERE bookID = ?;';
     $stmtBooks = mysqli_prepare($conn, $sqlBooks);
-    
+
     if (!$stmtBooks) {
         die('Error preparing Books statement: ' . mysqli_error($conn));
     }
@@ -124,7 +124,7 @@ function updateBook($isbn, $authorIDs, $title, $publicationYear, $coverImage, $d
         die('Error executing Books statement: ' . mysqli_error($conn));
     }
     mysqli_stmt_close($stmtBooks);
-    
+
     // 4. Insert authors
     $authorIdArray = explode(',', $authorIDs);
     foreach ($authorIdArray as $authorId) {
@@ -145,7 +145,7 @@ function updateBook($isbn, $authorIDs, $title, $publicationYear, $coverImage, $d
     // 5. Delete bookGeners
     $sqlBooks = 'DELETE FROM bookgenre WHERE bookID = ?;';
     $stmtBooks = mysqli_prepare($conn, $sqlBooks);
-    
+
     if (!$stmtBooks) {
         die('Error preparing Books statement: ' . mysqli_error($conn));
     }
@@ -163,7 +163,7 @@ function updateBook($isbn, $authorIDs, $title, $publicationYear, $coverImage, $d
         // Insert the BookGenre relationship
         $sqlBookGenre = 'INSERT INTO BookGenre (bookID, categoryID) VALUES (?, ?)';
         $stmtBookGenre = mysqli_prepare($conn, $sqlBookGenre);
-        
+
         if (!$stmtBookGenre) {
             die('Error preparing BookGenre statement: ' . mysqli_error($conn));
         }
@@ -181,7 +181,7 @@ function deleteBook($isbn) {
     // Delete Authors entries of the book.
     $sqlBooks = 'DELETE FROM BookAuthor WHERE bookID = ?;';
     $stmtBooks = mysqli_prepare($conn, $sqlBooks);
-    
+
     if (!$stmtBooks) {
         die('Error preparing Books statement: ' . mysqli_error($conn));
     }
@@ -194,7 +194,7 @@ function deleteBook($isbn) {
     // Delete Genre entries of the book.
     $sqlBooks = 'DELETE FROM BookGenre WHERE bookID = ?;';
     $stmtBooks = mysqli_prepare($conn, $sqlBooks);
-    
+
     if (!$stmtBooks) {
         die('Error preparing Books statement: ' . mysqli_error($conn));
     }
@@ -207,7 +207,7 @@ function deleteBook($isbn) {
     // Delete the entry in books.
     $sqlBooks = 'DELETE FROM Books WHERE ISBN = ?;';
     $stmtBooks = mysqli_prepare($conn, $sqlBooks);
-    
+
     if (!$stmtBooks) {
         die('Error preparing Books statement: ' . mysqli_error($conn));
     }
@@ -220,7 +220,7 @@ function deleteBook($isbn) {
     // Delete the entry in BookDetail.
     $sqlBooks = 'DELETE FROM BookDetail WHERE id = (SELECT bookDetails from Books where ISBN = ?);';
     $stmtBooks = mysqli_prepare($conn, $sqlBooks);
-    
+
     if (!$stmtBooks) {
         die('Error preparing Books statement: ' . mysqli_error($conn));
     }
@@ -231,10 +231,10 @@ function deleteBook($isbn) {
     mysqli_stmt_close($stmtBooks);
 }
 
-function getALLISBNs() {
+function getAllISBNs() {
     global $conn;
 
-    $sql = "SELECT ISBN FROM books GROUP BY ISBN;";
+    $sql = "SELECT ISBN FROM Books GROUP BY ISBN;";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -267,7 +267,7 @@ function getAuthors() {
             $authors = array();
             while ($row = mysqli_fetch_assoc($result)) {
                 $authors[] = array(
-                    'row' => 'authorBody',                    
+                    'row' => 'authorBody',
                     "ID" => $row['id'],
                     "Name" => $row['lastName'] ? $row['firstName'] . ' ' . $row['lastName'] : $row['firstName'], // Handles cases where lastName is null
                     "Biography" => $row['biography']
@@ -284,7 +284,7 @@ function getAuthors() {
 }
 
 // Genre
-function getGeners() {
+function getGenres() {
     global $conn;
 
     $sql = "SELECT id, category FROM BookCategory";
@@ -509,11 +509,11 @@ function searchBooks($searchTerm) {
 
 function getBooksByCategoryIds(array $categoryIds) {
     global $conn;
-  
+
     // Sanitize the input to prevent SQL injection
     $sanitizedCategoryIds = array_map('intval', $categoryIds);
     $categoryIdsString = implode(',', $sanitizedCategoryIds);
-  
+
     $sql = "SELECT b.ISBN, bd.title, bd.cover_image, bd.publication_year, bd.description, bd.publisher, bd.copies_owned, bs.status, GROUP_CONCAT(DISTINCT a.firstName, ' ' , a.lastName SEPARATOR ', ') as authors, GROUP_CONCAT(DISTINCT bc.category SEPARATOR ', ') AS categories
             FROM Books b
             JOIN BookDetail bd ON b.bookDetails = bd.id
@@ -524,17 +524,17 @@ function getBooksByCategoryIds(array $categoryIds) {
             JOIN BookCategory bc ON bg.categoryID = bc.id
             WHERE bg.categoryID IN (" . $categoryIdsString . ")
             GROUP BY b.ISBN;";
-  
+
     $result = $conn->query($sql);
-  
+
     if ($result) {
       if (mysqli_num_rows($result) > 0) {
           $books = array();
           $bookData = array();
-  
+
           while ($row = mysqli_fetch_assoc($result)) {
               $isbn = $row['ISBN'];
-  
+
               if (!isset($bookData[$isbn])) {
                   $bookData[$isbn] = array(
                       'row' => 'bookBody',
@@ -552,15 +552,15 @@ function getBooksByCategoryIds(array $categoryIds) {
                   );
               }
           }
-  
+
           foreach ($bookData as $book) {
               //Structure the authors and genres into strings.
               $book['Authors'] = explode(', ', $book['author']);
               $book['Genres'] = explode(', ', $book['genre']);
-  
+
               $books[] = $book;
           }
-  
+
           return array('success' => true, 'books' => $books);
       } else {
           return array('success' => true, 'books' => array()); // Return empty array if no results
@@ -572,11 +572,11 @@ function getBooksByCategoryIds(array $categoryIds) {
 
 function getBooksByAuthorIds(array $authorIDs) {
     global $conn;
-  
+
     // Sanitize the input to prevent SQL injection
     $sanitizedAuthorIds = array_map('intval', $authorIDs);
     $authorIdsString = implode(',', $sanitizedAuthorIds);
-  
+
     $sql = "SELECT b.ISBN, bd.title, bd.cover_image, bd.publication_year, bd.description, bd.publisher, bd.copies_owned, bs.status, GROUP_CONCAT(DISTINCT a.firstName, ' ' , a.lastName SEPARATOR ', ') as authors, GROUP_CONCAT(DISTINCT bc.category SEPARATOR ', ') AS categories
             FROM Books b
             JOIN BookDetail bd ON b.bookDetails = bd.id
@@ -587,17 +587,17 @@ function getBooksByAuthorIds(array $authorIDs) {
             JOIN BookCategory bc ON bg.categoryID = bc.id
             WHERE ba.authorID IN (" . $authorIdsString . ")
             GROUP BY b.ISBN;";
-  
+
     $result = $conn->query($sql);
-  
+
     if ($result) {
       if (mysqli_num_rows($result) > 0) {
           $books = array();
           $bookData = array();
-  
+
           while ($row = mysqli_fetch_assoc($result)) {
               $isbn = $row['ISBN'];
-  
+
               if (!isset($bookData[$isbn])) {
                   $bookData[$isbn] = array(
                       'row' => 'bookBody',
@@ -615,15 +615,15 @@ function getBooksByAuthorIds(array $authorIDs) {
                   );
               }
           }
-  
+
           foreach ($bookData as $book) {
               //Structure the authors and genres into strings.
               $book['Authors'] = explode(', ', $book['author']);
               $book['Genres'] = explode(', ', $book['genre']);
-  
+
               $books[] = $book;
           }
-  
+
           return array('success' => true, 'books' => $books);
       } else {
           return array('success' => true, 'books' => array()); // Return empty array if no results
@@ -658,7 +658,7 @@ function updateAuthor($id, $firstName, $lastName = null, $biography = null) {
     global $conn;
 
     // 1. Update Author
-    $sqlDetail = 'UPDATE authors
+    $sqlDetail = 'UPDATE Authors
                     SET
                     firstName = ?,
                     lastName = ?,
@@ -670,7 +670,7 @@ function updateAuthor($id, $firstName, $lastName = null, $biography = null) {
         die('Error preparing AuthorDetail statement: ' . mysqli_error($conn));
     }
     mysqli_stmt_bind_param($stmtDetail, 'ssss', $firstName, $lastName, $biography, $id);
-    
+
     if (!mysqli_stmt_execute($stmtDetail)) {
         die('Error executing AuthorDetail statement: ' . mysqli_error($conn));
     }
@@ -684,7 +684,7 @@ function searchAuthors($searchTerm) {
 
     $searchTerm = "%" . $searchTerm . "%"; // Add wildcards for LIKE search
 
-    $sql = "SELECT ID, GROUP_CONCAT(firstName, ' ' ,lastName SEPARATOR ' ') AS Name, biography AS Biography FROM authors
+    $sql = "SELECT ID, GROUP_CONCAT(firstName, ' ' ,lastName SEPARATOR ' ') AS Name, biography AS Biography FROM Authors
             WHERE ID LIKE ? OR firstName LIKE ? OR lastName LIKE ? OR biography LIKE ?
             GROUP BY ID;";
 
@@ -730,7 +730,7 @@ function getAuthor($id) {
 
     $searchTerm = $id;
 
-    $sql = "SELECT ID, firstName, lastName, biography AS Biography FROM authors WHERE id = ?;";
+    $sql = "SELECT ID, firstName, lastName, biography AS Biography FROM Authors WHERE id = ?;";
 
     $stmt = mysqli_prepare($conn, $sql);
     if (!$stmt) {
@@ -870,10 +870,10 @@ function addUser($roleID, $detailsID) {
 
 function getUsers() {
     global $conn;
-    $sql = "SELECT ud.id id, ud.username username, ud.firstName firstName, ud.lastName lastName, ud.joinedDate joinedDate, us.status userStatus 
-            FROM UserDetail ud 
-             JOIN Users u ON ud.id = u.detailsID 
-            JOIN UserStatus us ON u.statusID = us.id 
+    $sql = "SELECT ud.id id, ud.username username, ud.firstName firstName, ud.lastName lastName, ud.joinedDate joinedDate, us.status userStatus
+            FROM UserDetail ud
+             JOIN Users u ON ud.id = u.detailsID
+            JOIN UserStatus us ON u.statusID = us.id
             ORDER BY ud.joinedDate DESC;";
 
     $result = mysqli_query($conn, $sql);
@@ -883,7 +883,7 @@ function getUsers() {
             $authors = array();
             while ($row = mysqli_fetch_assoc($result)) {
                 $authors[] = array(
-                    'row' => 'userBody',                    
+                    'row' => 'userBody',
                     "ID" => $row['id'],
                     "username" => $row['username'],
                     "Name" => $row['lastName'] ? $row['firstName'] . ' ' . $row['lastName'] : $row['firstName'], // Handles cases where lastName is null
@@ -903,14 +903,14 @@ function getUsers() {
 
 function searchUsers($searchTerm) {
     global $conn;
-    
+
     $searchTerm = "%" . $searchTerm . "%";
     $sql = "SELECT ud.id id, ud.username username, ud.firstName firstName, ud.lastName lastName, ud.joinedDate joinedDate, us.status userStatus
-    FROM UserDetail ud 
-    JOIN Users u ON ud.id = u.detailsID 
-    JOIN UserStatus us ON u.statusID = us.id 
+    FROM UserDetail ud
+    JOIN Users u ON ud.id = u.detailsID
+    JOIN UserStatus us ON u.statusID = us.id
     WHERE ud.username LIKE ? OR ud.firstName LIKE ? OR ud.lastName LIKE ? ORDER BY ud.joinedDate DESC";
-    
+
     $stmt = mysqli_prepare($conn, $sql);
     if (!$stmt) {
         return array('success' => false, 'message' => 'Error preparing statement: ' . mysqli_error($conn), 'books' => array());
@@ -930,7 +930,7 @@ function searchUsers($searchTerm) {
 
                 if (!isset($userData[$id])) {
                     $userData[$id] = array(
-                        'row' => 'userBody',                    
+                        'row' => 'userBody',
                         "ID" => $row['id'],
                         "username" => $row['username'],
                         "Name" => $row['lastName'] ? $row['firstName'] . ' ' . $row['lastName'] : $row['firstName'], // Handles cases where lastName is null
@@ -955,7 +955,7 @@ function updateUser($id, $username, $firstName, $lastName, $joinedDate, $statusI
     global $conn;
 
     // 1. Update User Details
-    $sqlDetail = 'UPDATE userdetail
+    $sqlDetail = 'UPDATE UserDetail
                     SET
                     username = ?,
                     firstName = ?,
@@ -968,7 +968,7 @@ function updateUser($id, $username, $firstName, $lastName, $joinedDate, $statusI
         die('Error preparing UserDetail statement: ' . mysqli_error($conn));
     }
     mysqli_stmt_bind_param($stmtDetail, 'sssss', $username, $firstName, $lastName, $joinedDate, $id);
-    
+
     if (!mysqli_stmt_execute($stmtDetail)) {
         die('Error executing UserDetail statement: ' . mysqli_error($conn));
     }
@@ -978,9 +978,9 @@ function updateUser($id, $username, $firstName, $lastName, $joinedDate, $statusI
 
 
     // 2. Update Status and Role
-    $sqlUsers = 'UPDATE users SET  roleID = ?, statusID = ? WHERE id = ?;';
+    $sqlUsers = 'UPDATE Users SET  roleID = ?, statusID = ? WHERE id = ?;';
     $stmtUsers = mysqli_prepare($conn, $sqlUsers);
-    
+
     if (!$stmtUsers) {
         die('Error preparing Users statement: ' . mysqli_error($conn));
     }
@@ -994,7 +994,7 @@ function updateUser($id, $username, $firstName, $lastName, $joinedDate, $statusI
 // MAIN
 $books = getAllBooks();
 $authors = getAuthors();
-$genres = getGeners();
+$genres = getGenres();
 
 
 if (isset($_GET['book_count']) && $_GET['book_count'] == 'all-books') {

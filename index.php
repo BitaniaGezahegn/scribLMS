@@ -11,12 +11,12 @@
 <?php require_once 'Components/Card.php' ?>
 <?php require_once 'Components/Popup.php' ?>
 
-<?php 
+<?php
 require_once 'config.php';
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     require_once 'Includes/Data/dbFunctions.inc.php';
-    
+
     $userrole = $_SESSION['roleID'];
     $userid = $_SESSION['userid'];
     $user = getUser('', $userid)['users'][$userid] ?? '';
@@ -33,7 +33,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     exit();
 }
 
-// Popup Messages 
+// Popup Messages
 if (isset($_GET['popup']) && $_GET['popup'] == 'error') {
     $message = '';
     switch ($_GET['message']) {
@@ -62,7 +62,7 @@ if (isset($_GET['popup']) && $_GET['popup'] == 'error') {
             $message = "Unexpected error occurred.";
         }
         echo Popup(atts: ['popup' => 'error', 'message' => $message]);
-        
+
     } else if (isset($_GET['popup']) && $_GET['popup'] == 'success') {
         $message = '';
     switch ($_GET['message']) {
@@ -98,10 +98,10 @@ if (isset($_GET['popup']) && $_GET['popup'] == 'error') {
     <link rel="shortcut icon" href="Assets/Images/Logo/Icons/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="Assets/Images/Logo/Icons/apple-touch-icon.png" />
     <link rel="manifest" href="Assets/Images/Logo/Icons/site.webmanifest" />
-    
+
     <!-- Custom Style Sheets -->
-    <link rel="stylesheet" href="Assets/css/reset.css">
-    <link rel="stylesheet" href="Assets/css/styles.css">
+    <link rel="stylesheet" href="Assets/CSS/reset.css">
+    <link rel="stylesheet" href="Assets/CSS/styles.css">
 </head>
 <body>
 
@@ -112,7 +112,7 @@ if (isset($_GET['categories'])) {
     if ($_GET['categories'] != '') {
         $filteredBooks = getBooksByCategoryIds(explode(',', $_GET['categories']))['books'];
         $pagination->data = $filteredBooks;
-    
+
         if (count($filteredBooks) > 0 && $_GET['categories'] != '') {
             $pagination->itemsPerPage = count($filteredBooks);
             $pagination->paginateData();
@@ -184,7 +184,7 @@ $table = Table(atts: [
             'search' => '',
             'placeholder' => 'Search for a book'
         ]); ?>
-        
+
         <div class="browse">
             <?= Button(atts: ['btnType' => 'viewby']); ?>
             <?= Button(atts: ['btnType' => 'filterby']); ?>
@@ -196,11 +196,11 @@ $table = Table(atts: [
         $filters  = $author_container;
         $filtersName = 'authors';
     } else {
-        $filters  = $genre_container; 
+        $filters  = $genre_container;
         $filtersName = 'categories';
     }
         echo Filters(
-            atts: 
+            atts:
                 [
                 'filters' => $filters,
                 'name' => $filtersName
@@ -237,7 +237,7 @@ $table = Table(atts: [
 
 <!-- Grid View -->
 <div class="cards" id="grid_mode_container" style="display: none;">
-    <div class="wrapper">      
+    <div class="wrapper">
         <?php
 foreach ($pagination->getPage()['data'] as $item) {
     echo Card(
@@ -296,9 +296,9 @@ if (isset($_POST['viewType'])) {
             list_mode_container.style.display = "none";
             grid_mode_container.style.display = "grid";
         </script>';
-    
+
     }
-    
+
 }
 ?>
 <script defer src="Assets/JS/script.js"></script>

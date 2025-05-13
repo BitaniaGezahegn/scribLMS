@@ -3,7 +3,7 @@ require_once 'config.php';
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     require_once 'Includes/Data/dbFunctions.inc.php';
-    
+
     $userrole = $_SESSION['roleID'];
     $userid = $_SESSION['userid'];
     $user = getUser('', $userid)['users'][$userid] ?? '';
@@ -35,10 +35,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <link rel="shortcut icon" href="Assets/Images/Logo/Icons/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="Assets/Images/Logo/Icons/apple-touch-icon.png" />
     <link rel="manifest" href="Assets/Images/Logo/Icons/site.webmanifest" />
-    
+
     <!-- Custom Css -->
-    <link rel="stylesheet" href="Assets/css/reset.css">
-    <link rel="stylesheet" href="Assets/css/Book_Details.css">
+    <link rel="stylesheet" href="Assets/CSS/reset.css">
+    <link rel="stylesheet" href="Assets/CSS/Book_Details.css">
 </head>
 <body>
 
@@ -51,7 +51,7 @@ if (isset($_GET['ISBN'])) {
     $prevISBN = '';
 
 
-    foreach (getALLISBNs() as $key => $value) { 
+    foreach (getALLISBNs() as $key => $value) {
         if ($_POST['ISBN'] == $value['ISBN']) {
             $nextISBN = getALLISBNs()[$key + 1]['ISBN'] ?? $value['ISBN'];
             $prevISBN = getALLISBNs()[$key - 1]['ISBN'] ?? $value['ISBN'] ;
@@ -63,7 +63,7 @@ if (isset($_GET['ISBN'])) {
     } else if ($_POST['action'] == 'prev') {
         $ISBN = $prevISBN;
     }
-    
+
     header('location: Book_Details.php?ISBN=' . $ISBN);
 }
 
@@ -86,12 +86,12 @@ foreach (getAuthors() as $key => $value) {
         'navigation' => 'default',
         'icon' => $navIcon
         ]);?>
-        
+
         <!-- Content -->
         <div class="content content-details" id="content">
             <div class="banner" style='background: url("<?= $book['bookCover'] ?>");'></div>
             <div class="content-wrapper">
-            
+
                 <div class="floating-cover">
                   <img src=" <?= $book['bookCover'] ?>" alt="Book Cover">
                 </div>
@@ -118,7 +118,7 @@ foreach (getAuthors() as $key => $value) {
                             </button>
                         </form>
                     </div>
-                    
+
                     <p class="author"> <?= $book['author'] ?></p>
 
                     <div class="actions-wrapper">
@@ -175,7 +175,7 @@ foreach (getAuthors() as $key => $value) {
 
             </div>
         </div>
-                 
+
         <!-- Footer/Dashboard -->
         <?php
         if ($userrole == 1) {
@@ -186,7 +186,7 @@ foreach (getAuthors() as $key => $value) {
         ?>
 
         <?= Account(atts: ['owner' => $username, 'role' => $role, 'profile' => 'Assets/Images/Profile Pictures/profile picture.jpg']); ?>
-        
+
     </div>
     <!-- Scripts -->
     <script defer src="Assets/JS/script.js"></script>

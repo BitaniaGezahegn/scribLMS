@@ -3,7 +3,7 @@ require_once 'config.php';
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     require_once 'Includes/Data/dbFunctions.inc.php';
-    
+
     $userrole = $_SESSION['roleID'];
     $userid = $_SESSION['userid'];
     $user = getUser('', $userid)['users'][$userid] ?? '';
@@ -35,13 +35,13 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <link rel="shortcut icon" href="Assets/Images/Logo/Icons/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="Assets/Images/Logo/Icons/apple-touch-icon.png" />
     <link rel="manifest" href="Assets/Images/Logo/Icons/site.webmanifest" />
-    
+
     <!-- Custom Css -->
-    <link rel="stylesheet" href="Assets/css/reset.css">
-    <link rel="stylesheet" href="Assets/css/Add_Book.css">
+    <link rel="stylesheet" href="Assets/CSS/reset.css">
+    <link rel="stylesheet" href="Assets/CSS/Add_Book.css">
 </head>
 <body>
-    
+
 <!-- Components -->
 <?php require_once 'Components/Button.php' ?>
 <?php require_once 'Components/Account.php' ?>
@@ -49,7 +49,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 <?php require_once 'Components/Input.php' ?>
 <?php
 $options = [];
-foreach (getGeners() as $key => $value) {
+foreach (getGenres() as $key => $value) {
     $options[] = [
         'option' => $value['Name'],
         'value' => $value['ID']
@@ -70,7 +70,7 @@ foreach (getAuthors() as $key => $value) {
         'navigation' => 'default',
         'icon' => $navIcon
         ]);?>
-        
+
         <!-- Content -->
          <div class="content" id="content">
             <div class="header">
@@ -81,7 +81,7 @@ foreach (getAuthors() as $key => $value) {
                 <?php
                 $title = $POST['Title'] ?? '';
                 $POST['Publisher'];
-                
+
                 ?>
             </div>
 
@@ -100,7 +100,7 @@ foreach (getAuthors() as $key => $value) {
                         'placeholder' => 'Name of the Book'
                         ]) ?>
 
-                        <?php 
+                        <?php
                         echo Input(atts:[
                             'input' => 'multiselect',
                             'label' => 'Authors',
@@ -166,7 +166,7 @@ foreach (getAuthors() as $key => $value) {
                 </form>
             </div>
          </div>
-                 
+
         <!-- Footer/Dashboard -->
         <?php
         if ($userrole == 1) {
@@ -177,7 +177,7 @@ foreach (getAuthors() as $key => $value) {
         ?>
 
         <?= Account(atts: ['owner' => $username, 'role' => $role, 'profile' => 'Assets/Images/Profile Pictures/profile picture.jpg']); ?>
-        
+
     </div>
     <!-- Scripts -->
 </body>
