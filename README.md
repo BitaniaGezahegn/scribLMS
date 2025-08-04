@@ -78,4 +78,4 @@ This project demonstrates skills in:
 ***
 
 #### Need a similar solution?
-[mailto:bitaniagezahegn3@gmail.com](Contact me).
+Contact me: [bitaniagezahegn3@gmail.com].
