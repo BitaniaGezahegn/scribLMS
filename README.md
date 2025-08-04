@@ -78,6 +78,4 @@ This project demonstrates skills in:
 ***
 
 #### Need a similar solution?
-Contact me.
-
-You can access the code by going to [https://github.com/BitaniaGezahegn/scribLMS](https://github.com/BitaniaGezahegn/scribLM.
+[mailto:bitaniagezahegn3@gmail.com](Contact me).
