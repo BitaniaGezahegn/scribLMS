@@ -79,9 +79,7 @@ foreach (getAuthors() as $key => $value) {
                 </span>
                 <h2>Add Book Information</h2>
                 <?php
-                $title = $POST['Title'] ?? '';
-                $POST['Publisher'];
-
+                $title = $_POST['Title'] ?? '';
                 ?>
             </div>
 

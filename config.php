@@ -23,5 +23,3 @@ if (!isset($_SESSION['last_regeneration'])) {
         $_SESSION['last_regeneration'] = time();
     }
 }
-
-?>
